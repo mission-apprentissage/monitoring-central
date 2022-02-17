@@ -105,7 +105,6 @@ And you should see the fleet server in the agent list:
 
 ![Fleet server shown in hosts list](assets/fleet_server_host.png)
 
-
 ## What next ?
 
 Add Fleet agent where you need to, in order to get logs and metrics from the systems you need to monitor (see monitoring/agent project).
