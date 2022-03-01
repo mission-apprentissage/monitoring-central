@@ -215,6 +215,8 @@ services:
       - monitoring-network
 
   fleet-server:
+    hostname: 'fleet-server'
+    # privileged: true
     # depends_on:
     #   es01:
     #     condition: service_healthy
@@ -227,7 +229,9 @@ services:
     volumes:
       - monitoring-certs:/usr/share/elastic-agent/config/certs:ro
       - fleetserverdata:/usr/share/elastic-agent/data
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc:/hostfs/proc:ro
+      - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
     ports:
       - ${FLEET_SERVER_PORT}:8220
     environment:
