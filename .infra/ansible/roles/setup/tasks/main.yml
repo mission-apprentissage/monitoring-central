@@ -25,5 +25,5 @@
 - import_tasks: generate-ssl-certificate.yml
   tags: ssl
 
-- import_tasks: generate-gpg-key.yml
-  tags: gpg
+# - import_tasks: generate-gpg-key.yml
+#   tags: gpg
