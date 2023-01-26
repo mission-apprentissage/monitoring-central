@@ -1,0 +1,13 @@
+# Override containers for local / dev environnement
+version: "2.4"
+services:
+  reverse_proxy:
+    volumes:
+      - monitoring_nginx_data:/data:z
+      - ./reverse_proxy/dev/includes:/etc/nginx/templates/includes/env
+
+
+volumes:
+  monitoring_nginx_data:
+    driver: local
+    name: monitoring_nginx_data
