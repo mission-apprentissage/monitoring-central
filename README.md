@@ -1,5 +1,6 @@
 # MONITORING - CENTRAL
 
+
 This project contains several services that form an [**elastic stack**](https://www.elastic.co/elastic-stack/), composed of `elasticsearch`, `kibana`, an `elastic-agent` that works as a [**fleet server**](https://www.elastic.co/guide/en/fleet/current/fleet-server.html). We will use that stach as a centralized source for the metrics we want to collect and display.
 
 Furthermore, a setup service generates the requested certificates for https communication between those services, and set the `KIBANA_PASSWORD` for the `kibana_system` user in `elasticsearch`.
