@@ -19,14 +19,6 @@
         fstype: nfs
         boot: yes
 
-    - name: Add storage backup cron"
-      become: true
-      cron:
-        name: "backup OVH storage"
-        minute: "30"
-        hour: "0"
-        job: "bash /opt/monitoring/tools/backup-storage.sh 2>&1"
-
   when: backup_partition_name is defined
 
 - name: Ensure mounted directory has the same permission
