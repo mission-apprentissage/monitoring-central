@@ -3,25 +3,25 @@ set -euo pipefail
 #Needs to be run as sudo
 
 readonly BACKUP_NAS_DIR="/mnt/backups/metabase"
-readonly BACKUP_LOCAL_DIR="/opt/pilotage/backups/metabase"
+readonly BACKUP_LOCAL_DIR="/opt/monitoring/backups/metabase"
 
 stop_container() {
-  bash /opt/pilotage/stop-app.sh metabase
+  bash /opt/monitoring/stop-app.sh metabase
 }
 
 restart_container() {
   local CURRENT_BRANCH
-  CURRENT_BRANCH="$(git --git-dir=/opt/pilotage/repository/.git rev-parse --abbrev-ref HEAD)"
+  CURRENT_BRANCH="$(git --git-dir=/opt/monitoring/repository/.git rev-parse --abbrev-ref HEAD)"
 
-  NO_UPDATE=true bash /opt/pilotage/start-app.sh "${CURRENT_BRANCH}" --no-deps metabase
+  NO_UPDATE=true bash /opt/monitoring/start-app.sh "${CURRENT_BRANCH}" --no-deps metabase
 }
 
 function backup_metabase(){
   echo "Sauvegarde de la base metabase..."
 
   stop_container
-  tar -zcvf "/opt/pilotage/backups/metabase/metabase-$(date +'%Y-%m-%d_%H%M%S').tar.gz" \
-    -C /opt/pilotage/data/metabase .
+  tar -zcvf "/opt/monitoring/backups/metabase/metabase-$(date +'%Y-%m-%d_%H%M%S').tar.gz" \
+    -C /opt/monitoring/data/metabase .
   restart_container
 
   echo "Sauvegarde terminé."

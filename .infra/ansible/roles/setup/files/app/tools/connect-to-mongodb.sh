@@ -2,4 +2,4 @@
 set -euo pipefail
 #Needs to be run as sudo
 
-docker exec -it pilotage_mongodb mongosh "{{ vault[env_type].PILOTAGE_MONGODB_URI }}" "$@"
+docker exec -it monitoring_mongodb mongosh "{{ vault[env_type].PILOTAGE_MONGODB_URI }}" "$@"

@@ -3,7 +3,7 @@ set -euo pipefail
 
 readonly TEXT_MESSAGE=${1:?"Please provide a text message"}
 readonly SLACK_URL="{{ vault[env_type].PILOTAGE_SLACK_WEBHOOK_URL }}"
-readonly CHANNEL_NAME="#pilotage-alerting"
+readonly CHANNEL_NAME="#monitoring-alerting"
 readonly MNA_ENV=$(cat /env)
 
 curl -s -o /dev/null -X POST --data-urlencode \

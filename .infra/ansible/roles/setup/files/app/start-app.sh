@@ -2,7 +2,7 @@
 set -euo pipefail
 #Needs to be run as sudo
 
-readonly REPO_DIR="/opt/pilotage/repository"
+readonly REPO_DIR="/opt/monitoring/repository"
 readonly BRANCH=${1:?"Merci de préciser le nom de la branche (ex. main)"}; shift;
 
 function update_repository() {
@@ -21,9 +21,9 @@ function reload_containers() {
     cd "${REPO_DIR}"
     /usr/local/bin/docker-compose \
       -f "${REPO_DIR}/docker-compose.yml" \
-      -f "/opt/pilotage/.overrides/docker-compose.common.yml" \
-      -f "/opt/pilotage/.overrides/docker-compose.env.yml" \
-      --project-name pilotage \
+      -f "/opt/monitoring/.overrides/docker-compose.common.yml" \
+      -f "/opt/monitoring/.overrides/docker-compose.env.yml" \
+      --project-name monitoring \
       up -d --force-recreate --build --remove-orphans --renew-anon-volumes $*
     cd -
 }

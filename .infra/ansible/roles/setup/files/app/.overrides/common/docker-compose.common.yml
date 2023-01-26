@@ -7,6 +7,6 @@ services:
       - PROXY_SSL_CERT=/ssl/fullchain.pem
       - PROXY_SSL_CERT_KEY=/ssl/privkey.pem
     volumes:
-      - /opt/pilotage/data/nginx:/data
-      - /opt/pilotage/data/ssl:/ssl:ro
-      - /opt/pilotage/.overrides/reverse_proxy/includes:/etc/nginx/templates/includes/env
+      - /opt/monitoring/data/nginx:/data
+      - /opt/monitoring/data/ssl:/ssl:ro
+      - /opt/monitoring/.overrides/reverse_proxy/includes:/etc/nginx/templates/includes/env

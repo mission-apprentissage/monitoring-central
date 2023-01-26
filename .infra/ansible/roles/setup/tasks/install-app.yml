@@ -1,17 +1,17 @@
 - name: Stoppe tous les conteneurs applicatifs
-  shell: "bash /opt/pilotage/stop-app.sh"
+  shell: "bash /opt/monitoring/stop-app.sh"
 
 - name: "Clone du repository (branche : {{ git_revision }})"
   git:
-    repo: "https://github.com/mission-apprentissage/tjp-pilotage.git"
+    repo: "https://github.com/mission-apprentissage/monitoring-central.git"
     version: "{{ git_revision }}"
     force: yes
     accept_hostkey: yes
-    dest: /opt/pilotage/repository
+    dest: /opt/monitoring/repository
 
 - name: Création des répertoires 'overrides'
   file:
-    path: "/opt/pilotage/.overrides/{{ item.path }}/"
+    path: "/opt/monitoring/.overrides/{{ item.path }}/"
     state: directory
   with_filetree:
     - app/.overrides/common/
@@ -21,7 +21,7 @@
 - name: Copie des fichiers 'overrides'
   ansible.builtin.template:
     src: "{{ item.src }}"
-    dest: "/opt/pilotage/.overrides/{{ item.path }}"
+    dest: "/opt/monitoring/.overrides/{{ item.path }}"
   with_filetree:
     - app/.overrides/common/
     - app/.overrides/{{ env_type }}/
@@ -35,18 +35,18 @@
     group: root
     mode: 770
   with_items:
-    - "/opt/pilotage/tools"
-    - "/opt/pilotage/repository"
-    - "/opt/pilotage/data"
-    - "/opt/pilotage/backups"
-    - "/opt/pilotage/.overrides"
+    - "/opt/monitoring/tools"
+    - "/opt/monitoring/repository"
+    - "/opt/monitoring/data"
+    - "/opt/monitoring/backups"
+    - "/opt/monitoring/.overrides"
 
 - name: Add cron to rotate nginx files
   ansible.builtin.cron:
     name: "rotate_nginx_log_files"
     minute: "0"
     hour: "1"
-    job: "bash /opt/pilotage/tools/rotate-nginx-log-files.sh >> /var/log/cron.log 2>&1"
+    job: "bash /opt/monitoring/tools/rotate-nginx-log-files.sh >> /var/log/cron.log 2>&1"
 
 # - name: Add cron to reload app automatically
 #   when: env_type == "recette"
@@ -55,4 +55,4 @@
 #     minute: "*/1"
 #     hour: 8-20
 #     weekday: 1-5
-#     job: "bash /opt/pilotage/reload-app.sh >> /var/log/cron.log 2>&1"
+#     job: "bash /opt/monitoring/reload-app.sh >> /var/log/cron.log 2>&1"
